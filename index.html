@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MicroPlan Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: "#0f172a",
+              indigo: {
+                DEFAULT: "#6366f1",
+                dark: "#4f46e5",
+                light: "#818cf8",
+                subtle: "#eef2ff",
+              },
+              slate: {
+                50: "#f8fafc",
+                100: "#f1f5f9",
+                200: "#e2e8f0",
+                300: "#cbd5e1",
+                400: "#94a3b8",
+                500: "#64748b",
+                600: "#475569",
+                700: "#334155",
+                800: "#1e293b",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              "4xl": "2rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        --navy: #0f172a;
+        --indigo: #6366f1;
+        --indigo-dark: #4f46e5;
+        --indigo-light: #818cf8;
+        --slate-text: #64748b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .hero-glow {
+        background: radial-gradient(
+          ellipse 60% 50% at 50% 40%,
+          rgba(99, 102, 241, 0.18) 0%,
+          transparent 70%
+        );
+      }
+
+      .btn-primary {
+        background-color: var(--indigo);
+        transition: all 0.2s ease;
+      }
+      .btn-primary:hover {
+        background-color: var(--indigo-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+      }
+
+      .btn-outline {
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        transition: all 0.2s ease;
+      }
+      .btn-outline:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.8);
+      }
+
+      .card-hover {
+        transition: all 0.25s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      }
+
+      .planner-line {
+        height: 2px;
+        border-radius: 2px;
+      }
+
+      .coming-badge {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+
+      .cta-gradient {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.2s ease;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--indigo);
+        border-radius: 1px;
+        transition: width 0.2s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+      .float-anim {
+        animation: float 4s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body data-id="0" class="bg-white text-slate-800">
+    <app-icon
+      data-id="1"
+      hidden
+      data-icon="layout-dashboard"
+      data-palette="Blue"
+    ></app-icon>
+
+    <!-- ========== TOP NAVIGATION ========== -->
+    <nav
+      data-id="2"
+      id="navbar"
+      class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/60"
+    >
+      <div
+        data-id="3"
+        class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-16"
+      >
+        <!-- Logo -->
+        <a data-id="4" href="#" class="flex items-center gap-2.5 shrink-0">
+          <div
+            data-id="5"
+            class="w-8 h-8 rounded-lg bg-indigo flex items-center justify-center"
+          >
+            <span data-id="6" class="text-white font-bold text-sm leading-none"
+              >M</span
+            >
+          </div>
+          <span data-id="7" class="text-navy font-bold text-lg tracking-tight"
+            >MicroPlan Studio</span
+          >
+        </a>
+
+        <!-- Desktop Nav -->
+        <div data-id="8" class="hidden md:flex items-center gap-8">
+          <a
+            data-id="9"
+            href="#about"
+            class="nav-link text-sm font-medium text-slate-500 hover:text-navy"
+            >Tools</a
+          >
+          <a
+            data-id="10"
+            href="#about"
+            class="nav-link text-sm font-medium text-slate-500 hover:text-navy"
+            >About</a
+          >
+          <a
+            data-id="11"
+            href="#contact"
+            class="nav-link text-sm font-medium text-slate-500 hover:text-navy"
+            >Contact</a
+          >
+          <a
+            data-id="12"
+            href="#daily-planner"
+            class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full inline-flex items-center gap-1.5"
+          >
+            Try Daily Planner
+            <i data-id="13" data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          data-id="14"
+          id="mobile-menu-btn"
+          class="md:hidden p-2 -mr-2 text-navy"
+          aria-label="Open menu"
+        >
+          <i data-id="15" data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+      data-id="16"
+      id="mobile-menu"
+      class="hidden fixed inset-0 z-[60] bg-white flex flex-col"
+    >
+      <div
+        data-id="17"
+        class="flex items-center justify-between px-5 h-16 border-b border-slate-200/60"
+      >
+        <div data-id="18" class="flex items-center gap-2.5">
+          <div
+            data-id="19"
+            class="w-8 h-8 rounded-lg bg-indigo flex items-center justify-center"
+          >
+            <span data-id="20" class="text-white font-bold text-sm leading-none"
+              >M</span
+            >
+          </div>
+          <span data-id="21" class="text-navy font-bold text-lg tracking-tight"
+            >MicroPlan Studio</span
+          >
+        </div>
+        <button
+          data-id="22"
+          id="mobile-menu-close"
+          class="p-2 -mr-2 text-navy"
+          aria-label="Close menu"
+        >
+          <i data-id="23" data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div data-id="24" class="flex flex-col p-6 gap-2">
+        <a
+          data-id="25"
+          href="#about"
+          class="mobile-nav-link text-base font-medium text-slate-700 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors"
+          >Tools</a
+        >
+        <a
+          data-id="26"
+          href="#about"
+          class="mobile-nav-link text-base font-medium text-slate-700 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors"
+          >About</a
+        >
+        <a
+          data-id="27"
+          href="#contact"
+          class="mobile-nav-link text-base font-medium text-slate-700 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors"
+          >Contact</a
+        >
+        <div data-id="28" class="pt-4">
+          <a
+            data-id="29"
+            href="#daily-planner"
+            class="mobile-nav-link btn-primary text-white text-base font-semibold px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 w-full"
+          >
+            Try Daily Planner
+            <i data-id="30" data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main data-id="31">
+      <!-- ========== HERO SECTION ========== -->
+      <section data-id="32" class="relative bg-navy overflow-hidden">
+        <div
+          data-id="33"
+          class="hero-glow absolute inset-0 pointer-events-none"
+        ></div>
+        <div
+          data-id="34"
+          class="relative max-w-5xl mx-auto px-5 md:px-8 pt-20 md:pt-28 pb-16 md:pb-24 text-center"
+        >
+          <h1
+            data-id="35"
+            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight"
+          >
+            Plan Less.<br data-id="36" class="sm:hidden" />
+            Accomplish More.
+          </h1>
+          <p
+            data-id="37"
+            class="mt-6 md:mt-8 text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+          >
+            MicroPlan Studio builds focused micro-tools that help you structure
+            your day, week, and goals — one small plan at a time.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div
+            data-id="38"
+            class="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a
+              data-id="39"
+              href="#daily-planner"
+              class="btn-primary text-white font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-base"
+            >
+              Try the Daily Planner
+              <i data-id="40" data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a
+              data-id="41"
+              href="#about"
+              class="btn-outline text-white font-medium px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-base"
+            >
+              Learn More
+              <i data-id="42" data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <!-- Mockup Planner Card -->
+          <div data-id="43" class="mt-14 md:mt-20 max-w-sm mx-auto float-anim">
+            <div
+              data-id="44"
+              class="bg-white rounded-2xl shadow-2xl shadow-indigo/10 p-6 text-left"
+            >
+              <div data-id="45" class="flex items-center gap-2 mb-4">
+                <div data-id="46" class="w-3 h-3 rounded-full bg-indigo"></div>
+                <span
+                  data-id="47"
+                  class="text-xs font-semibold text-navy uppercase tracking-wider"
+                  >Today's Plan</span
+                >
+              </div>
+              <div data-id="48" class="space-y-2.5">
+                <div data-id="49" class="flex items-center gap-3">
+                  <span
+                    data-id="50"
+                    class="text-[11px] font-medium text-slate-400 w-10 shrink-0 tabular-nums"
+                    >6 AM</span
+                  >
+                  <div
+                    data-id="51"
+                    class="planner-line bg-slate-200 flex-1 w-full"
+                  ></div>
+                </div>
+                <div data-id="52" class="flex items-center gap-3">
+                  <span
+                    data-id="53"
+                    class="text-[11px] font-medium text-slate-400 w-10 shrink-0 tabular-nums"
+                    >7 AM</span
+                  >
+                  <div
+                    data-id="54"
+                    class="planner-line bg-indigo/30 flex-1"
+                    style="width: 75%"
+                  ></div>
+                </div>
+                <div data-id="55" class="flex items-center gap-3">
+                  <span
+                    data-id="56"
+                    class="text-[11px] font-medium text-slate-400 w-10 shrink-0 tabular-nums"
+                    >8 AM</span
+                  >
+                  <div
+                    data-id="57"
+                    class="planner-line bg-indigo/50 flex-1"
+                    style="width: 60%"
+                  ></div>
+                </div>
+                <div data-id="58" class="flex items-center gap-3">
+                  <span
+                    data-id="59"
+                    class="text-[11px] font-medium text-slate-400 w-10 shrink-0 tabular-nums"
+                    >9 AM</span
+                  >
+                  <div
+                    data-id="60"
+                    class="planner-line bg-slate-200 flex-1 w-full"
+                  ></div>
+                </div>
+                <div data-id="61" class="flex items-center gap-3">
+                  <span
+                    data-id="62"
+                    class="text-[11px] font-medium text-slate-400 w-10 shrink-0 tabular-nums"
+                    >10 AM</span
+                  >
+                  <div
+                    data-id="63"
+                    class="planner-line bg-indigo/20 flex-1"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div data-id="64" class="mt-5 pt-4 border-t border-slate-100">
+                <span
+                  data-id="65"
+                  class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider"
+                  >Top 3 Priorities</span
+                >
+                <div data-id="66" class="mt-2.5 space-y-2">
+                  <div data-id="67" class="flex items-center gap-2.5">
+                    <div
+                      data-id="68"
+                      class="w-3.5 h-3.5 rounded border-[1.5px] border-indigo/40 shrink-0"
+                    ></div>
+                    <div
+                      data-id="69"
+                      class="planner-line bg-slate-200 flex-1 w-full"
+                    ></div>
+                  </div>
+                  <div data-id="70" class="flex items-center gap-2.5">
+                    <div
+                      data-id="71"
+                      class="w-3.5 h-3.5 rounded border-[1.5px] border-indigo/40 shrink-0"
+                    ></div>
+                    <div
+                      data-id="72"
+                      class="planner-line bg-slate-200 flex-1"
+                      style="width: 70%"
+                    ></div>
+                  </div>
+                  <div data-id="73" class="flex items-center gap-2.5">
+                    <div
+                      data-id="74"
+                      class="w-3.5 h-3.5 rounded border-[1.5px] border-indigo/40 shrink-0"
+                    ></div>
+                    <div
+                      data-id="75"
+                      class="planner-line bg-slate-200 flex-1"
+                      style="width: 55%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ABOUT SECTION ========== -->
+      <section data-id="76" id="about" class="bg-white py-20 md:py-28">
+        <div data-id="77" class="max-w-6xl mx-auto px-5 md:px-8">
+          <div
+            data-id="78"
+            class="text-center max-w-2xl mx-auto mb-14 md:mb-16"
+          >
+            <span
+              data-id="79"
+              class="inline-block text-xs font-bold text-indigo uppercase tracking-widest mb-3"
+              >About</span
+            >
+            <h2
+              data-id="80"
+              class="text-3xl md:text-4xl font-bold text-navy leading-tight"
+            >
+              Tiny tools, built for focus.
+            </h2>
+          </div>
+          <div
+            data-id="81"
+            class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+          >
+            <!-- Feature 1 -->
+            <div
+              data-id="82"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8"
+            >
+              <div
+                data-id="83"
+                class="w-12 h-12 rounded-xl bg-indigo-subtle flex items-center justify-center mb-5"
+              >
+                <i
+                  data-id="84"
+                  data-lucide="calendar-days"
+                  class="w-6 h-6 text-indigo"
+                ></i>
+              </div>
+              <h3 data-id="85" class="text-lg font-semibold text-navy mb-2">
+                Daily Planner Generator
+              </h3>
+              <p data-id="86" class="text-sm text-slate-500 leading-relaxed">
+                Map out your day in minutes. Print or save a structured daily
+                plan tailored to your schedule.
+              </p>
+            </div>
+            <!-- Feature 2 -->
+            <div
+              data-id="87"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8"
+            >
+              <div
+                data-id="88"
+                class="w-12 h-12 rounded-xl bg-indigo-subtle flex items-center justify-center mb-5"
+              >
+                <i
+                  data-id="89"
+                  data-lucide="zap"
+                  class="w-6 h-6 text-indigo"
+                ></i>
+              </div>
+              <h3 data-id="90" class="text-lg font-semibold text-navy mb-2">
+                Micro-Focused
+              </h3>
+              <p data-id="91" class="text-sm text-slate-500 leading-relaxed">
+                No bloated features. Each tool does one thing well, so you can
+                focus on what matters.
+              </p>
+            </div>
+            <!-- Feature 3 -->
+            <div
+              data-id="92"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8"
+            >
+              <div
+                data-id="93"
+                class="w-12 h-12 rounded-xl bg-indigo-subtle flex items-center justify-center mb-5"
+              >
+                <i
+                  data-id="94"
+                  data-lucide="rocket"
+                  class="w-6 h-6 text-indigo"
+                ></i>
+              </div>
+              <h3 data-id="95" class="text-lg font-semibold text-navy mb-2">
+                Always Growing
+              </h3>
+              <p data-id="96" class="text-sm text-slate-500 leading-relaxed">
+                New micro-tools are added regularly. Check back for weekly
+                planners, goal trackers, and more.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== FEATURED TOOL ========== -->
+      <section
+        data-id="97"
+        id="daily-planner"
+        class="bg-slate-50 py-20 md:py-28"
+      >
+        <div data-id="98" class="max-w-6xl mx-auto px-5 md:px-8">
+          <div
+            data-id="99"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+          >
+            <!-- Left: Text -->
+            <div data-id="100" class="order-2 lg:order-1">
+              <span
+                data-id="101"
+                class="inline-block text-xs font-bold text-indigo uppercase tracking-widest bg-indigo-subtle px-3 py-1.5 rounded-full mb-5"
+                >Featured Tool</span
+              >
+              <h2
+                data-id="102"
+                class="text-3xl md:text-4xl font-bold text-navy leading-tight mb-4"
+              >
+                Daily Planner Generator
+              </h2>
+              <p
+                data-id="103"
+                class="text-base text-slate-500 leading-relaxed mb-8 max-w-lg"
+              >
+                Generate a beautiful, printable daily planner in seconds.
+                Customize your time blocks, add priorities, and start each day
+                with clarity.
+              </p>
+              <a
+                data-id="104"
+                href="#daily-planner"
+                class="btn-primary text-white font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-base"
+              >
+                Open Daily Planner
+                <i data-id="105" data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <!-- Right: Mock Planner -->
+            <div data-id="106" class="order-1 lg:order-2 flex justify-center">
+              <div
+                data-id="107"
+                class="bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 md:p-8 w-full max-w-md"
+              >
+                <div
+                  data-id="108"
+                  class="flex items-center justify-between mb-6"
+                >
+                  <div data-id="109" class="flex items-center gap-2.5">
+                    <div
+                      data-id="110"
+                      class="w-3 h-3 rounded-full bg-indigo"
+                    ></div>
+                    <span
+                      data-id="111"
+                      class="text-sm font-bold text-navy tracking-tight"
+                      >Today's Plan</span
+                    >
+                  </div>
+                  <span
+                    data-id="112"
+                    class="text-[11px] font-medium text-slate-400"
+                    >June 14, 2026</span
+                  >
+                </div>
+
+                <!-- Time Slots -->
+                <div data-id="113" class="space-y-3">
+                  <div
+                    data-id="114"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="115"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >6:00 AM</span
+                    >
+                    <div
+                      data-id="116"
+                      class="planner-line bg-slate-200 flex-1 w-full"
+                    ></div>
+                  </div>
+                  <div
+                    data-id="117"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="118"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >7:00 AM</span
+                    >
+                    <div
+                      data-id="119"
+                      class="planner-line bg-indigo/30 flex-1"
+                      style="width: 70%"
+                    ></div>
+                  </div>
+                  <div
+                    data-id="120"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="121"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >8:00 AM</span
+                    >
+                    <div
+                      data-id="122"
+                      class="planner-line bg-indigo/40 flex-1"
+                      style="width: 55%"
+                    ></div>
+                  </div>
+                  <div
+                    data-id="123"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="124"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >9:00 AM</span
+                    >
+                    <div
+                      data-id="125"
+                      class="planner-line bg-slate-200 flex-1 w-full"
+                    ></div>
+                  </div>
+                  <div
+                    data-id="126"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="127"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >10:00 AM</span
+                    >
+                    <div
+                      data-id="128"
+                      class="planner-line bg-indigo/25 flex-1"
+                      style="width: 80%"
+                    ></div>
+                  </div>
+                  <div
+                    data-id="129"
+                    class="flex items-center gap-4 py-1.5 border-b border-slate-100"
+                  >
+                    <span
+                      data-id="130"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >11:00 AM</span
+                    >
+                    <div
+                      data-id="131"
+                      class="planner-line bg-slate-200 flex-1"
+                      style="width: 65%"
+                    ></div>
+                  </div>
+                  <div data-id="132" class="flex items-center gap-4 py-1.5">
+                    <span
+                      data-id="133"
+                      class="text-xs font-semibold text-slate-400 w-12 shrink-0 tabular-nums"
+                      >12:00 PM</span
+                    >
+                    <div
+                      data-id="134"
+                      class="planner-line bg-indigo/35 flex-1"
+                      style="width: 50%"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Top 3 Priorities -->
+                <div data-id="135" class="mt-6 pt-5 border-t border-slate-100">
+                  <span
+                    data-id="136"
+                    class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+                    >Top 3 Priorities</span
+                  >
+                  <div data-id="137" class="mt-3 space-y-2.5">
+                    <div data-id="138" class="flex items-center gap-3">
+                      <div
+                        data-id="139"
+                        class="w-4 h-4 rounded border-[1.5px] border-indigo/40 shrink-0 flex items-center justify-center"
+                      >
+                        <i
+                          data-id="140"
+                          data-lucide="check"
+                          class="w-2.5 h-2.5 text-indigo"
+                        ></i>
+                      </div>
+                      <div
+                        data-id="141"
+                        class="planner-line bg-indigo/20 flex-1 w-full"
+                      ></div>
+                    </div>
+                    <div data-id="142" class="flex items-center gap-3">
+                      <div
+                        data-id="143"
+                        class="w-4 h-4 rounded border-[1.5px] border-indigo/40 shrink-0"
+                      ></div>
+                      <div
+                        data-id="144"
+                        class="planner-line bg-slate-200 flex-1"
+                        style="width: 75%"
+                      ></div>
+                    </div>
+                    <div data-id="145" class="flex items-center gap-3">
+                      <div
+                        data-id="146"
+                        class="w-4 h-4 rounded border-[1.5px] border-indigo/40 shrink-0"
+                      ></div>
+                      <div
+                        data-id="147"
+                        class="planner-line bg-slate-200 flex-1"
+                        style="width: 60%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== COMING SOON ========== -->
+      <section data-id="148" id="coming-soon" class="bg-white py-20 md:py-28">
+        <div data-id="149" class="max-w-6xl mx-auto px-5 md:px-8">
+          <div
+            data-id="150"
+            class="text-center max-w-2xl mx-auto mb-14 md:mb-16"
+          >
+            <h2
+              data-id="151"
+              class="text-3xl md:text-4xl font-bold text-navy leading-tight mb-3"
+            >
+              More tools on the way.
+            </h2>
+            <p data-id="152" class="text-base text-slate-500 leading-relaxed">
+              We're building a suite of focused micro-tools. Each one designed
+              for a single purpose, done right.
+            </p>
+          </div>
+          <div
+            data-id="153"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            <!-- Card 1: Weekly Planner -->
+            <div
+              data-id="154"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8 relative"
+            >
+              <div data-id="155" class="flex items-center justify-between mb-5">
+                <div
+                  data-id="156"
+                  class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center"
+                >
+                  <i
+                    data-id="157"
+                    data-lucide="calendar-range"
+                    class="w-6 h-6 text-blue-500"
+                  ></i>
+                </div>
+                <span
+                  data-id="158"
+                  class="coming-badge text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                  >Coming Soon</span
+                >
+              </div>
+              <h3 data-id="159" class="text-lg font-semibold text-navy mb-2">
+                Weekly Planner
+              </h3>
+              <p data-id="160" class="text-sm text-slate-500 leading-relaxed">
+                Plan your entire week at a glance with a clean 7-day layout.
+              </p>
+            </div>
+            <!-- Card 2: Goal Tracker -->
+            <div
+              data-id="161"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8 relative"
+            >
+              <div data-id="162" class="flex items-center justify-between mb-5">
+                <div
+                  data-id="163"
+                  class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center"
+                >
+                  <i
+                    data-id="164"
+                    data-lucide="target"
+                    class="w-6 h-6 text-purple-500"
+                  ></i>
+                </div>
+                <span
+                  data-id="165"
+                  class="coming-badge text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                  >Coming Soon</span
+                >
+              </div>
+              <h3 data-id="166" class="text-lg font-semibold text-navy mb-2">
+                Goal Tracker
+              </h3>
+              <p data-id="167" class="text-sm text-slate-500 leading-relaxed">
+                Break big goals into small, trackable milestones.
+              </p>
+            </div>
+            <!-- Card 3: Focus Timer -->
+            <div
+              data-id="168"
+              class="card-hover bg-slate-50 rounded-2xl p-7 md:p-8 relative"
+            >
+              <div data-id="169" class="flex items-center justify-between mb-5">
+                <div
+                  data-id="170"
+                  class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center"
+                >
+                  <i
+                    data-id="171"
+                    data-lucide="timer"
+                    class="w-6 h-6 text-emerald-500"
+                  ></i>
+                </div>
+                <span
+                  data-id="172"
+                  class="coming-badge text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                  >Coming Soon</span
+                >
+              </div>
+              <h3 data-id="173" class="text-lg font-semibold text-navy mb-2">
+                Focus Timer
+              </h3>
+              <p data-id="174" class="text-sm text-slate-500 leading-relaxed">
+                Pomodoro-style timer to keep you in the zone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CTA BANNER ========== -->
+      <section data-id="175" class="cta-gradient py-20 md:py-24">
+        <div data-id="176" class="max-w-3xl mx-auto px-5 md:px-8 text-center">
+          <h2
+            data-id="177"
+            class="text-3xl md:text-4xl font-bold text-white leading-tight mb-4"
+          >
+            Ready to plan smarter?
+          </h2>
+          <p
+            data-id="178"
+            class="text-base md:text-lg text-indigo-100 opacity-80 mb-8 max-w-xl mx-auto"
+          >
+            Start with the Daily Planner — free, fast, and beautifully simple.
+          </p>
+          <a
+            data-id="179"
+            href="#daily-planner"
+            id="cta-btn"
+            class="inline-flex items-center gap-2 bg-white text-indigo font-semibold px-8 py-4 rounded-full text-base transition-all duration-200 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5"
+          >
+            Get Started Free
+            <i data-id="180" data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT ANCHOR ========== -->
+      <div data-id="181" id="contact"></div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer data-id="182" class="bg-navy border-t border-indigo/20">
+      <div data-id="183" class="max-w-6xl mx-auto px-5 md:px-8 py-12 md:py-14">
+        <div
+          data-id="184"
+          class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 items-start"
+        >
+          <!-- Left: Logo + Tagline -->
+          <div data-id="185">
+            <div data-id="186" class="flex items-center gap-2.5 mb-3">
+              <div
+                data-id="187"
+                class="w-7 h-7 rounded-lg bg-indigo flex items-center justify-center"
+              >
+                <span
+                  data-id="188"
+                  class="text-white font-bold text-xs leading-none"
+                  >M</span
+                >
+              </div>
+              <span
+                data-id="189"
+                class="text-white font-bold text-base tracking-tight"
+                >MicroPlan Studio</span
+              >
+            </div>
+            <p data-id="190" class="text-sm text-slate-400 italic">
+              Small plans. Big momentum.
+            </p>
+          </div>
+
+          <!-- Center: Quick Links -->
+          <div
+            data-id="191"
+            class="flex flex-col items-start md:items-center gap-2"
+          >
+            <span
+              data-id="192"
+              class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1"
+              >Quick Links</span
+            >
+            <a
+              data-id="193"
+              href="#"
+              class="text-sm text-slate-400 hover:text-white transition-colors"
+              >Home</a
+            >
+            <a
+              data-id="194"
+              href="#daily-planner"
+              class="text-sm text-slate-400 hover:text-white transition-colors"
+              >Daily Planner</a
+            >
+            <a
+              data-id="195"
+              href="#about"
+              class="text-sm text-slate-400 hover:text-white transition-colors"
+              >About</a
+            >
+            <a
+              data-id="196"
+              href="#contact"
+              class="text-sm text-slate-400 hover:text-white transition-colors"
+              >Contact</a
+            >
+          </div>
+
+          <!-- Right: Copyright -->
+          <div
+            data-id="197"
+            class="flex flex-col items-start md:items-end gap-1.5"
+          >
+            <p data-id="198" class="text-sm text-slate-400">
+              &copy; 2026 MicroPlan Studio.
+            </p>
+            <p data-id="199" class="text-sm text-slate-400">
+              All rights reserved.
+            </p>
+            <p data-id="200" class="text-xs text-slate-500 mt-1">
+              microplanstudio.com
+            </p>
+          </div>
+        </div>
+
+        <div
+          data-id="201"
+          class="mt-10 pt-6 border-t border-slate-800 text-center"
+        >
+          <p data-id="202" class="text-xs text-slate-500">Made by Copilot</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Icons — progressive enhancement
+      if (
+        typeof lucide !== "undefined" &&
+        typeof lucide.createIcons === "function"
+      ) {
+        lucide.createIcons();
+      }
+
+      // Mobile menu toggle
+      var mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      var mobileMenuClose = document.getElementById("mobile-menu-close");
+      var mobileMenu = document.getElementById("mobile-menu");
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener("click", function () {
+          mobileMenu.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        });
+      }
+
+      if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.addEventListener("click", function () {
+          mobileMenu.classList.add("hidden");
+          document.body.style.overflow = "";
+        });
+      }
+
+      // Close mobile menu on link click
+      var mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+      mobileNavLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          if (mobileMenu) {
+            mobileMenu.classList.add("hidden");
+            document.body.style.overflow = "";
+          }
+        });
+      });
+
+      // Smooth scroll for anchor links (fallback for browsers without CSS smooth)
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener("click", function (e) {
+          var targetId = this.getAttribute("href");
+          if (targetId && targetId.length > 1) {
+            var target = document.querySelector(targetId);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+
+      // Navbar shadow on scroll
+      var navbar = document.getElementById("navbar");
+      if (navbar) {
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 10) {
+            navbar.classList.add("shadow-sm");
+          } else {
+            navbar.classList.remove("shadow-sm");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
