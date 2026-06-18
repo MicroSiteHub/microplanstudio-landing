@@ -158,6 +158,13 @@ footer {
   margin-bottom: 20px;
 }
 
+.schedule-table .header {
+  width: 60px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  font-size: 14px;
+}
+
 .schedule-table .time {
   width: 60px;
   border: 1px solid #ccc;
@@ -180,7 +187,7 @@ footer {
 
 .schedule-day-cell {
   border: 1px solid #ccc;
-  width: 20px;
+  width: 140px;
   height: 20px;
   text-align: center; /* horizontal centering */
   vertical-align: middle; /* vertical centering */
