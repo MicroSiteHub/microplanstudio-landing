@@ -121,11 +121,6 @@ footer {
   flex-direction: column;
 }
 
-h2 {
-  font-size: 18px;
-  margin: 0 0 8px 0;
-}
-
 .priority-list,
 .task-list {
   list-style: none;
