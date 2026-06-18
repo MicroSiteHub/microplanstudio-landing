@@ -171,6 +171,29 @@ footer {
   height: 24px;
 }
 
+.schedule-name-cell {
+  border: 1px solid #ccc;
+  width: 140px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.schedule-day-cell {
+  border: 1px solid #ccc;
+  width: 20px;
+  height: 20px;
+  text-align: center; /* horizontal centering */
+  vertical-align: middle; /* vertical centering */
+}
+
+.schedule-checkbox {
+  border: 1px solid #666;
+  width: 12px;
+  height: 12px;
+  display: inline-block; /* works with text-align: center */
+  margin-top: 4px; /* adjust as needed for vertical centering */
+}
+
 .notes-box {
   border: 1px solid #ccc;
   height: 180px;
