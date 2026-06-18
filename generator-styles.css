@@ -187,7 +187,7 @@ footer {
 
 .schedule-day-cell {
   border: 1px solid #ccc;
-  width: 140px;
+  width: 20px;
   height: 20px;
   text-align: center; /* horizontal centering */
   vertical-align: middle; /* vertical centering */
